@@ -1,3 +1,4 @@
+using Logging;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,7 +46,7 @@ namespace Persona.Api
         }
 
       
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseMiddleware<ManageErrorMiddleware>();
 
@@ -55,6 +56,9 @@ namespace Persona.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Persona.Api v1"));
             }
+            loggerFactory.AddSyslog(
+                   Configuration.GetValue<string>("Papertrail:host"),
+                   Configuration.GetValue<int>("Papertrail:port"));
 
             app.UseHttpsRedirection();
 

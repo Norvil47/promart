@@ -23,6 +23,7 @@ namespace Persona.Infraestructura.Persona
         public class Manejador : IRequestHandler<Ejecutar, string>
         {
             private readonly ApplicationDbContext db;
+
             public Manejador(ApplicationDbContext context)
             {
                 db = context;
