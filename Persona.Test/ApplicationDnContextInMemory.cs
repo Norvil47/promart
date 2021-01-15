@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Persona.Persistencia;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +10,13 @@ namespace Persona.Test
 {
     public static class ApplicationDbContextInMemory
     {
-        //public static ApplicationDbContext Get()
-        //{
-        //    var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-        //        .UseInMemoryDatabase(databaseName: $"Catalog.Db")
-        //        .Options;
+        public static ApplicationDbContext Get()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: $"Persona.Db")
+                .Options;
 
-        //    return new ApplicationDbContext(options);
-        //}
+            return new ApplicationDbContext(options);
+        }
     }
 }
